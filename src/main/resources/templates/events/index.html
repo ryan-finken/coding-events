@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1>Events</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.getKey()}"></td>
+        <td th:text="${event.getValue()}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>
