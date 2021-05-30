@@ -1,27 +1,22 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 @RequestMapping("events")
 public class EventController {
-    private static HashMap<String, String> events = new HashMap<>();
 
     @GetMapping
     public String displayAllEvents(Model model) {
-//        model.addAttribute("events", events);
-//        return "events/index";
-        model.addAttribute("events", events);
-        events.put("A wedding", "Two people getting married, plus a party afterwards.");
-        events.put("A funeral", "An event memorializing the life of one person.");
-        events.put("A Graduation", "An event celebrating a student finishing a degree.");
+        model.addAttribute("events", EventData.getAll());
         return "events/index";
     }
 
@@ -31,8 +26,40 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
-        events.put(eventName, eventDescription);
+    public String createEvent(@ModelAttribute Event newEvent) {
+        EventData.add(newEvent);
+        return "redirect:";
+    }
+
+    @GetMapping("delete")
+    public String deleteEvent(Model model) {
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String handleDeleteEventForm(@RequestParam(required = false) int[] eventIds) {
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+
+        return "redirect:";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        // controller code will go here
+        model.addAttribute("event", EventData.getById(eventId));
+        return "events/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description) {
+        // controller code will go here
+        EventData.getById(eventId).setName(name);
+        EventData.getById(eventId).setDescription(description);
         return "redirect:";
     }
 }
