@@ -1,6 +1,5 @@
 package org.launchcode.codingevents.controllers;
 
-import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
@@ -11,8 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -62,18 +59,4 @@ public class EventController {
         return "redirect:";
     }
 
-    @GetMapping("edit/{eventId}")
-    public String displayEditForm(Model model, @PathVariable int eventId) {
-        // controller code will go here
-        model.addAttribute("event", eventRepository.findById(eventId));
-        return "events/edit";
-    }
-
-    @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description) {
-        // controller code will go here
-        EventData.getById(eventId).setName(name);
-        EventData.getById(eventId).setDescription(description);
-        return "redirect:";
-    }
 }
