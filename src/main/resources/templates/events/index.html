@@ -13,7 +13,6 @@
             <th>Description</th>
             <th>Type</th>
             <th>Location</th>
-            <th>Edit Event</th>
         </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -23,9 +22,6 @@
         <td th:text="${event.description}"></td>
         <td th:text="${event.type.displayName}"></td>
         <td th:text="${event.location}"></td>
-        <td>
-            <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
-        </td>
     </tr>
 </table>
 
