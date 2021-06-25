@@ -21,12 +21,14 @@ public class EventController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
+        model.addAttribute("title", "All Events");
         model.addAttribute("events", eventRepository.findAll());
         return "events/index";
     }
 
     @GetMapping("create")
     public String renderCreateEventForm(Model model) {
+        model.addAttribute("title", "Create Event");
         model.addAttribute(new Event());
         model.addAttribute("types", EventType.values());
         return "events/create";
@@ -44,6 +46,7 @@ public class EventController {
 
     @GetMapping("delete")
     public String deleteEvent(Model model) {
+        model.addAttribute("title", "Delete Events");
         model.addAttribute("events", eventRepository.findAll());
         return "events/delete";
     }
