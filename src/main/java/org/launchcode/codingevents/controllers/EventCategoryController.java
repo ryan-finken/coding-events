@@ -35,8 +35,8 @@ public class EventCategoryController {
     }
 
     @PostMapping("create")
-    public String processCreateEventCategoryForm(Errors errors,
-                                                 @ModelAttribute @Valid EventCategory newEventCategory,
+    public String processCreateEventCategoryForm(@ModelAttribute @Valid EventCategory newEventCategory,
+                                                 Errors errors,
                                                  Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("errorMsg", "Bad data!");
