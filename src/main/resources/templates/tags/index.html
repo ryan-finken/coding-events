@@ -12,7 +12,7 @@
     </thead>
     <tr th:each="tag : ${tags}">
         <td th:text="${tag.id}"></td>
-        <td th:text="${tag.getDisplayName()}"></td>
+        <td><a th:text="${tag.getDisplayName()}" th:href="'/events?tagId=' + ${tag.id}" ></a></td>
     </tr>
 </table>
 
