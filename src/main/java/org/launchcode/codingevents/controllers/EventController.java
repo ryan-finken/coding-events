@@ -112,4 +112,13 @@ public class EventController {
         return "events/index";
     }
 
+    @GetMapping("details")
+    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
+        model.addAttribute("title", "Details for Event: " + eventId);
+        Optional<Event> result = eventRepository.findById(eventId);
+        Event event = result.get();
+        model.addAttribute("event", event);
+        return "events/details";
+    }
+
 }

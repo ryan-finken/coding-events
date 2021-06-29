@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Field</th>
+    <th>Value</th>
+  </tr>
+  </thead>
+  <tr>
+    <td>Name</td>
+    <td th:text="${event.name}"></td>
+  </tr>
+  <tr>
+    <td>Category</td>
+    <td th:text="${event.eventCategory.name}"></td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td th:text="${event.eventDetails.description}"></td>
+  </tr>
+  <tr>
+    <td>Location</td>
+    <td th:text="${event.eventDetails.location}"></td>
+  </tr>
+  <tr>
+    <td>Contact Email</td>
+    <td th:text="${event.eventDetails.contactEmail}"></td>
+  </tr>
+  <tr>
+    <td>Tags</td>
+    <td>
+      <span th:each="tag : ${event.tags}"
+            th:text="${tag.getDisplayName()} + ' '"
+      > </span>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
